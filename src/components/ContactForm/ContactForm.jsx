@@ -1,5 +1,4 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -62,7 +61,7 @@ export const ContactForm = () => {
           return;
         }
         toast.success(`${name} added to your contact list.`);
-        dispatch(addContact({ name, number, id: nanoid() }));
+        dispatch(addContact({ name, number }));
         actions.resetForm();
       }}
     >
