@@ -7,11 +7,19 @@ import {
 } from 'components';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSelector } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContacts, selectIsLoading } from 'redux/selectors';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/contactsOperations';
 
 export const App = () => {
   const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <>
@@ -21,7 +29,8 @@ export const App = () => {
       </Section>
       <Section title="Contacts">
         <Filter />
-        {contacts.length > 0 ? (
+        {isLoading && <div>Loading...</div>}
+        {contacts.length > 0 && !isLoading ? (
           <ContactList />
         ) : (
           <Notifications message={'There are no contacts in your phonebook.'} />

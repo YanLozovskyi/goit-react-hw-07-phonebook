@@ -11,7 +11,7 @@ import {
 } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactSlice';
+import { addContact } from 'redux/contactsOperations';
 import { toast } from 'react-toastify';
 
 const PhonebookSchema = Yup.object().shape({
@@ -53,7 +53,7 @@ export const ContactForm = () => {
         }
         if (
           contacts.find(
-            ({ number: oldNumber }) =>
+            ({ phone: oldNumber }) =>
               oldNumber.toLowerCase() === number.toLowerCase()
           )
         ) {
