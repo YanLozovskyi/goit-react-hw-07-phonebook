@@ -61,7 +61,7 @@ export const ContactForm = () => {
           return;
         }
         toast.success(`${name} added to your contact list.`);
-        dispatch(addContact({ name, number }));
+        dispatch(addContact({ name, phone: number }));
         actions.resetForm();
       }}
     >
